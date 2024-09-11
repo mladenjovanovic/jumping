@@ -35,14 +35,14 @@ gg <- df \%>\%
 
 gg
 
-# Where does the y crosses the 0? Return interpolated location using x
+# Where does the y crosses the 0? Returns interpolated location using x
 cross0 <- zero_crossings(x = df$t, y = df$f)
 
 gg +
   ggplot2::geom_vline(xintercept = cross0, color = "red")
 
 # When using only x, function returns interpolated location in x
-# This is because the acutal x observation might not be located on 0
+# This is because the actual x observation might not be located on 0
 zero_crossings(x = df$f)
 
 # If you want to pull the closes points, make sure to round the indices
