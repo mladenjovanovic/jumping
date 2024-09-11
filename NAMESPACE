@@ -3,5 +3,6 @@
 export("%>%")
 export(gradient)
 export(integrate)
+export(longest_TRUE_streak)
 export(zero_crossings)
 importFrom(magrittr,"%>%")
