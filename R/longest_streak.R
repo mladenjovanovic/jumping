@@ -15,7 +15,9 @@ get_streaks <- function(x){
 
   df <- df %>%
     dplyr::mutate(lagged_x = dplyr::lag(x)) %>%
-    dplyr::mutate(streak_start = (x != lagged_x))
+    dplyr::rowwise() %>%
+    dplyr::mutate(streak_start = !identical(x, lagged_x)) %>% #(x != lagged_x))
+    dplyr::ungroup()
 
   df[1, "streak_start"] <- TRUE
 
