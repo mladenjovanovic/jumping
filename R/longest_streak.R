@@ -56,7 +56,7 @@ get_longest_streaks <- function(x) {
 #'     in the logical \code{x} vector
 #'
 #' @param x A logical vector
-#' @returns A numeric 2-items vectors with \code{start} and \code{stop} indices of the
+#' @returns A numeric two-element vector with \code{start} and \code{stop} indices of the
 #'     longest \code{TRUE} value streak in \code{x}
 #' @examples
 #' longest_TRUE_streak(c(FALSE, TRUE, TRUE, FALSE, TRUE, TRUE, TRUE))

@@ -10,7 +10,7 @@ longest_TRUE_streak(x)
 \item{x}{A logical vector}
 }
 \value{
-A numeric 2-items vectors with \code{start} and \code{stop} indices of the
+A numeric two-element vector with \code{start} and \code{stop} indices of the
 longest \code{TRUE} value streak in \code{x}
 }
 \description{
