@@ -1,8 +1,8 @@
 library(tidyverse)
-library(segmented)
 library(plotly)
+library(zoo)
 
-cmj_df <- read_csv("dev/abalakov.csv", skip = 9)
+cmj_df <- read_csv("dev/SJ-b.csv", skip = 9)
 
 cmj_df <- cmj_df %>%
   mutate(Force = Left + Right)
@@ -15,18 +15,36 @@ gg <- cmj_df %>%
   ggplot(aes(x = Time)) +
   geom_line(aes(y = Force)) +
   geom_hline(yintercept = c(BW), linetype = "dotted", alpha = 0.7)
+gg
 
+# Parse CMJ
+df <- parse_CMJ(time = cmj_df$Time, force = cmj_df$Force, mass = BM, na.rm = F)
+max(df$trace$height_from_take_off, na.rm = TRUE)
 
-# Find initiation of the jump
-flight_phase_index <- longest_TRUE_streak(cmj_df$Force < 20)
-flight_phase_time <- cmj_df$Time[flight_phase_index]
+df_long <- df$trace %>%
+  pivot_longer(cols = c("force", "acceleration", "velocity", "height_from_take_off")) %>%
+  mutate(name = factor(name, levels = c("force", "acceleration", "velocity", "height_from_take_off")))
 
+min_max_df <- df_long %>%
+  group_by(name) %>%
+  summarise(
+    ymin = min(value, na.rm = TRUE),
+    ymax = max(value, na.rm = TRUE)
+  ) %>%
+  ungroup()
 
-gg <- gg +
-  annotate(
-    "rect",
-    xmin = flight_phase_time[1], xmax = flight_phase_time[2],
-    ymin = -20, ymax = 20,
-    alpha = 0.5)
+major_phases <- expand_grid(
+  df$sub_phases,
+  min_max_df
+)
 
-ggplotly(gg)
+gg <- df_long %>%
+  ggplot() +
+  geom_rect(data = major_phases, aes(xmin = start_time, xmax = stop_time, ymin = ymin, ymax = ymax, fill = sub_phase), color = "black", alpha = 0.2) +
+  geom_line(aes(x = time, y = value)) +
+  facet_wrap(~name, scales = "free_y", ncol = 1)
+
+gg
+
+ggplotly(gg + theme(legend.position = "none"))
+
