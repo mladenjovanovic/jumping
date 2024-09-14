@@ -80,7 +80,8 @@ parse_CMJ <- function(time,
     ) %>%
     # Create net impuls and power
     dplyr::mutate(
-      impulse = integrate(time, net_force, cumulative = TRUE),
+      impulse = integrate(time, force, cumulative = TRUE),
+      impulse_net = integrate(time, net_force, cumulative = TRUE),
       power = force * velocity,
       work = integrate(time, power, cumulative = TRUE)
     )
