@@ -59,7 +59,7 @@ parse_CMJ <- function(time,
     ) %>%
     # Make acceleration before movement start time equal to 0
     dplyr::mutate(
-      acceleration = dplyr::if_else(time <= movement_start_time, 0, acceleration)
+      acceleration = dplyr::if_else(time < movement_start_time, 0, acceleration)
     ) %>%
     # Make acceleration during flight time equal to -gravity
     dplyr::mutate(
