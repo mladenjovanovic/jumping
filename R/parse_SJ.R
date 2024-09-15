@@ -60,8 +60,8 @@ parse_SJ <- function(time,
   trace <- trace %>%
     dplyr::mutate(
       weight = mass * g,
-      net_force = force - weight,
-      acceleration = net_force / mass
+      force_net = force - weight,
+      acceleration = force_net / mass
     ) %>%
     # Make acceleration before movement start time equal to 0
     dplyr::mutate(
@@ -82,12 +82,13 @@ parse_SJ <- function(time,
     # Create different time and distance origin variables
     dplyr::mutate(
       time_from_start = time - movement_start_time,
-      time_from_take_off = time - take_off_time
+      time_from_take_off = time - take_off_time,
+      time_perc = 100 * (time - movement_start_time) / (take_off_time - movement_start_time)
     ) %>%
     # Create net impulse and power
     dplyr::mutate(
       impulse = integrate(time, force, cumulative = TRUE),
-      impulse_net = integrate(time, net_force, cumulative = TRUE),
+      impulse_net = integrate(time, force_net, cumulative = TRUE),
       power = force * velocity,
       work = integrate(time, power, cumulative = TRUE)
     )
