@@ -88,9 +88,9 @@ FT_from_height <- function(height, gravity_const = 9.81) {
 #' @examples
 #' force_over_distance(100, 100 * 9.81, 4, 0.4)
 force_over_distance <- function(mass,
-                                     weight = mass * 9.81,
-                                     take_off_velocity,
-                                     push_off_distance) {
+                                weight = mass * 9.81,
+                                take_off_velocity,
+                                push_off_distance) {
   weight + (mass * (take_off_velocity^2) / (2 * push_off_distance))
 }
 
@@ -107,9 +107,9 @@ force_over_distance <- function(mass,
 #' @examples
 #' force_over_time(100, 100 * 9.81, 4, 0.3)
 force_over_time <- function(mass,
-                                 weight = mass * 9.81,
-                                 take_off_velocity,
-                                 time_taken) {
+                            weight = mass * 9.81,
+                            take_off_velocity,
+                            time_taken) {
   (mass * take_off_velocity / (time_taken)) + (weight)
 }
 
