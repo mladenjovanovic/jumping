@@ -75,3 +75,63 @@ TOV_from_height <- function(height, gravity_const = 9.81) {
 FT_from_height <- function(height, gravity_const = 9.81) {
   sqrt(8 * height / gravity_const)
 }
+
+#' Get Mean Force over Distance
+#'
+#' Function \code{mean_force_over_distance} calculates mean force over push-off distance using work equation
+#' @param mass Numeric vector
+#' @param weight Numeric vector. Default \code{mass} * 9.81
+#' @param take_off_velocity Numeric vector
+#' @param push_off_distance Numeric vector
+#' @return Numeric vector
+#' @export
+#' @examples
+#' mean_force_over_distance(100, 100 * 9.81, 4, 0.4)
+mean_force_over_distance <- function(mass,
+                                     weight = mass * 9.81,
+                                     take_off_velocity,
+                                     push_off_distance) {
+  weight + (mass * (take_off_velocity^2) / (2 * push_off_distance))
+}
+
+
+#' Get Mean Force over Time
+#'
+#' Function \code{mean_force_over_time} calculates mean force over push-off time using impulse equation
+#' @param mass Numeric vector
+#' @param weight Numeric vector. Default \code{mass} * 9.81
+#' @param take_off_velocity Numeric vector
+#' @param time_taken Numeric vector
+#' @return Numeric vector
+#' @export
+#' @examples
+#' mean_force_over_time(100, 100 * 9.81, 4, 0.3)
+mean_force_over_time <- function(mass,
+                                 weight = mass * 9.81,
+                                 take_off_velocity,
+                                 time_taken) {
+  (mass * take_off_velocity / (time_taken)) + (weight)
+}
+
+#' Get Take-off Velocity
+#'
+#' \code{TOV_from_force} returns take off velocity when \code{mean_force} is applied to the object
+#' of \code{mass} over \code{push_off_distance} in vertical direction, assuming zero starting velocity
+#' @param mean_force Numeric vector. Default 3000
+#' @param mass Numeric vector. Default 75
+#' @param push_off_distance Numeric vector. Default 0.4
+#' @param gravity_const Numeric vector. Default 9.81
+#' @return Numeric vector
+#' @export
+#' @examples
+#' TOV_from_force(
+#'   mean_force = 2000,
+#'   mass = 85,
+#'   push_off_distance = 0.4
+#' )
+TOV_from_force <- function(mean_force = 3000,
+                                  mass = 75,
+                                  push_off_distance = 0.4,
+                                  gravity_const = 9.81) {
+  sqrt(2 * push_off_distance * (mean_force / mass - gravity_const))
+}
