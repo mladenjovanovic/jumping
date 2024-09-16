@@ -4,6 +4,7 @@ parse_SJ <- function(time,
                       g = 9.80665,
                       start_threshold = 20,
                       contact_threshold = 20,
+                     start_time = NULL,
                       na.rm = FALSE) {
 
   trace <- data.frame(
@@ -39,6 +40,7 @@ parse_SJ <- function(time,
       time < max_force_time
     )
 
+  if (is.null(start_time)) {
   # Find start of the motion
   upper_start_threshold <- mass * g + start_threshold
   lower_start_threshold <- mass * g - start_threshold
@@ -49,7 +51,9 @@ parse_SJ <- function(time,
 
   propulsive_phase_time <- before_peak_trace$time[propulsive_phase_index]
   movement_start_time <-  propulsive_phase_time[2]
-
+  } else {
+    movement_start_time <- start_time
+  }
   # ----- Orig
   #propulsive_phase_index <- longest_TRUE_streak(before_peak_trace$force > upper_start_threshold)
   #propulsive_phase_time <- before_peak_trace$time[propulsive_phase_index]
