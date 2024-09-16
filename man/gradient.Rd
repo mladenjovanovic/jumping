@@ -25,7 +25,7 @@ parameter. Please see examples for more information
 \examples{
 df <- dplyr::tibble(
   x = seq(0, 2 * pi, length = 100),
-  y = sin(x) + 0.75 * sin(3 * x) + 0.45 * sin(5 * x) +  0.25 * sin(7 * x),
+  y = sin(x) + 0.75 * sin(3 * x) + 0.45 * sin(5 * x) + 0.25 * sin(7 * x),
   grad = gradient(x, y)
 )
 

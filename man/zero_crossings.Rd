@@ -25,7 +25,7 @@ provided, then the function returns interpolated indices of \code{x} vector when
 \examples{
 df <- dplyr::tibble(
   t = seq(0, pi, length = 100),
-  f = sin(t) + 0.5 * sin(3 * t) + 0.45 * sin(5 * t) +  0.25 * sin(7 * t) - 0.65,
+  f = sin(t) + 0.5 * sin(3 * t) + 0.45 * sin(5 * t) + 0.25 * sin(7 * t) - 0.65,
 )
 
 gg <- df \%>\%
