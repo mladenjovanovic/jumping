@@ -1,7 +1,7 @@
 parse_CMJ <- function(time,
                       force,
                       mass,
-                      g = 9.80665,
+                      gravity_const = 9.80665,
                       start_threshold = 20,
                       contact_threshold = 20,
                       start_time = NULL,
@@ -41,8 +41,8 @@ parse_CMJ <- function(time,
       )
 
     # Find start of the motion
-    upper_start_threshold <- mass * g + start_threshold
-    lower_start_threshold <- mass * g - start_threshold
+    upper_start_threshold <- mass * gravity_const + start_threshold
+    lower_start_threshold <- mass * gravity_const - start_threshold
 
     unloading_phase_index <- longest_TRUE_streak(before_peak_trace$force < lower_start_threshold)
 
@@ -57,7 +57,7 @@ parse_CMJ <- function(time,
   # Create kinematics traces
   trace <- trace %>%
     dplyr::mutate(
-      weight = mass * g,
+      weight = mass * gravity_const,
       force_net = force - weight,
       acceleration = force_net / mass
     ) %>%
@@ -69,7 +69,7 @@ parse_CMJ <- function(time,
     dplyr::mutate(
       acceleration = dplyr::if_else(
         time >= flight_phase_time[1] & time <= flight_phase_time[2],
-        -g, acceleration
+        -gravity_const, acceleration
       )
     ) %>%
     # Create velocity and height assuming v = 0 and h = 0 at the instant of
