@@ -110,13 +110,13 @@ gg <- jumps_trace_long %>%
   geom_hline(yintercept = 0, linetype = "dotted", alpha = 0.3) +
   geom_vline(xintercept = 0, linetype = "dotted", alpha = 0.3) +
   geom_line(aes(x = time_from_take_off, y = value, group = 1)) +
-  #geom_point(
-  #  data = jumps_moments_long %>%
-  #  filter(name != "Acceleration (m/s/s)"),
-  #  aes(x = time_from_take_off, y = value),
-  #  shape = 21, size = 1,
-  #  fill = "white"
-  #) +
+  geom_point(
+    data = jumps_moments_long %>%
+    filter(name != "Acceleration (m/s/s)"),
+    aes(x = time_from_take_off, y = value),
+    shape = 21, size = 1,
+    fill = "white"
+  ) +
   facet_grid(name~jump, scales = "free_y") +
   #facet_grid2(jump~name, scales = "free_y", independent = "y") +
   ylab(NULL) +
@@ -159,27 +159,26 @@ gg <- jumps_trace %>%
   ggplot() +
   theme_ggdist() +
   geom_vline(xintercept = 0, linetype = "dotted", alpha = 0.3) +
-  geom_hline(yintercept = 100, linetype = "dotted", alpha = 0.3) +
   geom_hline(yintercept = mean(jumps_trace$weight), linetype = "solid", alpha = 0.3) +
   geom_line(aes(x = height_from_take_off, y = force, color = jump), alpha = 0.8) +
   ylab("Force [N]") +
   xlab("Height from take-off [m]") +
+  ggtitle("Force over distance in the Concentric phase") +
   theme(legend.position = "top", legend.title = element_blank())
 
 gg
 
 # Force-Velocity
 gg <- jumps_trace %>%
-  filter(phase %in% c("Concentric phase")) %>%
+  filter(sub_phase %in% c("Propulsive phase [speeding]")) %>%
   ggplot() +
   theme_ggdist() +
-  geom_vline(xintercept = 0, linetype = "dotted", alpha = 0.3) +
-  geom_hline(yintercept = 100, linetype = "dotted", alpha = 0.3) +
   geom_hline(yintercept = mean(jumps_trace$weight), linetype = "solid", alpha = 0.3) +
-  geom_line(aes(x = height_from_take_off, y = force, color = jump), alpha = 0.8) +
+  geom_line(aes(x = velocity, y = force, color = jump), alpha = 0.8) +
   ylab("Force [N]") +
-  xlab("Height from take-off [m]") +
-  theme(legend.position = "top", legend.title = element_blank())
+  xlab("Velocity [m/s]") +
+  theme(legend.position = "top", legend.title = element_blank()) +
+  ggtitle("Force-velocity relationship in the Concentric phase (propulsive speeding)")
 
 gg
 
