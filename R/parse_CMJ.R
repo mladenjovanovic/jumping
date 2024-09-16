@@ -6,7 +6,6 @@ parse_CMJ <- function(time,
                       contact_threshold = 20,
                       start_time = NULL,
                       na.rm = FALSE) {
-
   trace <- data.frame(
     time = time,
     force = force
@@ -70,7 +69,8 @@ parse_CMJ <- function(time,
     dplyr::mutate(
       acceleration = dplyr::if_else(
         time >= flight_phase_time[1] & time <= flight_phase_time[2],
-        -g, acceleration)
+        -g, acceleration
+      )
     ) %>%
     # Create velocity and height assuming v = 0 and h = 0 at the instant of
     # movement start
@@ -140,7 +140,8 @@ parse_CMJ <- function(time,
 
   trace <- dplyr::left_join(
     trace,
-    moments_df, by = "time"
+    moments_df,
+    by = "time"
   )
 
   # Phases
@@ -159,7 +160,8 @@ parse_CMJ <- function(time,
     trace$time,
     breaks = phases_df$start_time,
     labels = head(phases_df$phase, -1),
-    include.lowest = TRUE)
+    include.lowest = TRUE
+  )
 
   phases_df <- head(phases_df, -1)
   trace$phase <- factor(trace$phase, levels = phases_df$phase)
@@ -186,12 +188,13 @@ parse_CMJ <- function(time,
     trace$time,
     breaks = sub_phases_df$start_time,
     labels = head(sub_phases_df$sub_phase, -1),
-    include.lowest = TRUE)
+    include.lowest = TRUE
+  )
 
   sub_phases_df <- head(sub_phases_df, -1)
   trace$sub_phase <- factor(trace$sub_phase, levels = sub_phases_df$sub_phase)
   sub_phases_df$sub_phase <- factor(sub_phases_df$sub_phase, levels = sub_phases_df$sub_phase)
 
- # Return
+  # Return
   list(trace = trace, moments = moments_df, phases = phases_df, sub_phases = sub_phases_df)
 }

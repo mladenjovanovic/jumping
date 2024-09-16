@@ -1,5 +1,5 @@
 # Get all streaks
-get_streaks <- function(x){
+get_streaks <- function(x) {
 
   # Solution for "no visible binding for global variable" note
   # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -11,12 +11,13 @@ get_streaks <- function(x){
   # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   df <- data.frame(
     index = seq_along(x),
-    x = x)
+    x = x
+  )
 
   df <- df %>%
     dplyr::mutate(lagged_x = dplyr::lag(x)) %>%
     dplyr::rowwise() %>%
-    dplyr::mutate(streak_start = !identical(x, lagged_x)) %>% #(x != lagged_x))
+    dplyr::mutate(streak_start = !identical(x, lagged_x)) %>% # (x != lagged_x))
     dplyr::ungroup()
 
   df[1, "streak_start"] <- TRUE
@@ -77,7 +78,7 @@ longest_TRUE_streak <- function(x) {
   value <- NULL
   # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-  if(!is.logical(x)) {
+  if (!is.logical(x)) {
     stop("'x' must be logical vector")
   }
 

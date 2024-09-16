@@ -20,14 +20,13 @@
 #'
 #' @export
 integrate <- function(x, y, cumulative = FALSE) {
-  ox = order(x)
-  xs = x[ox]
-  ys = y[ox]
+  ox <- order(x)
+  xs <- x[ox]
+  ys <- y[ox]
 
   if (isTRUE(cumulative)) {
-    c(0, cumsum((xs[-1] - xs[-length(xs)]) * (ys[-1] + ys[-length(ys)]))/2)
+    c(0, cumsum((xs[-1] - xs[-length(xs)]) * (ys[-1] + ys[-length(ys)])) / 2)
   } else {
-    sum((xs[-1] - xs[-length(xs)]) * (ys[-1] + ys[-length(ys)]))/2
+    sum((xs[-1] - xs[-length(xs)]) * (ys[-1] + ys[-length(ys)])) / 2
   }
-
 }

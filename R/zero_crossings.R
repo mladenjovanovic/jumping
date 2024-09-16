@@ -15,7 +15,7 @@
 #' @examples
 #' df <- dplyr::tibble(
 #'   t = seq(0, pi, length = 100),
-#'   f = sin(t) + 0.5 * sin(3 * t) + 0.45 * sin(5 * t) +  0.25 * sin(7 * t) - 0.65,
+#'   f = sin(t) + 0.5 * sin(3 * t) + 0.45 * sin(5 * t) + 0.25 * sin(7 * t) - 0.65,
 #' )
 #'
 #' gg <- df %>%
@@ -54,15 +54,16 @@
 #'
 #' @export
 zero_crossings <- function(x, y = NULL) {
-
   if (is.null(y)) {
     zerocrossings <- rootSolve::uniroot.all(
       stats::approxfun(seq_len(length(x)), x),
-      interval = range(seq_len(length(x))))
+      interval = range(seq_len(length(x)))
+    )
   } else {
     zerocrossings <- rootSolve::uniroot.all(
       stats::approxfun(x, y),
-      interval = range(x))
+      interval = range(x)
+    )
   }
 
   if (length(zerocrossings) == 0) {
