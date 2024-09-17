@@ -4,24 +4,19 @@
 \alias{TOV_from_force}
 \title{Get Take-off Velocity}
 \usage{
-TOV_from_force(
-  force = 3000,
-  mass = 75,
-  push_off_distance = 0.4,
-  gravity_const = 9.81
-)
+TOV_from_force(force, mass, push_off_distance = 0.4, gravity_const = 9.81)
 }
 \arguments{
-\item{force}{Numeric vector. Default 3000}
+\item{force}{Numeric vector in Newtons}
 
-\item{mass}{Numeric vector. Default 75}
+\item{mass}{Numeric vector in kilograms}
 
-\item{push_off_distance}{Numeric vector. Default 0.4}
+\item{push_off_distance}{Numeric vector in meters. Default 0.4 meters}
 
 \item{gravity_const}{Numeric vector. Default 9.81}
 }
 \value{
-Numeric vector
+Numeric vector in m/s
 }
 \description{
 \code{TOV_from_force} returns take off velocity when \code{force} is applied to the object

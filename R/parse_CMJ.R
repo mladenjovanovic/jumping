@@ -6,6 +6,18 @@ parse_CMJ <- function(time,
                       contact_threshold = 20,
                       start_time = NULL,
                       na.rm = FALSE) {
+
+  # Solution for "no visible binding for global variable" note
+  # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  acceleration <- NULL
+  force_net <- NULL
+  height_from_start <- NULL
+  power <- NULL
+  velocity  <- NULL
+  weight <- NULL
+  # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
   trace <- data.frame(
     time = time,
     force = force
@@ -159,11 +171,11 @@ parse_CMJ <- function(time,
   trace$phase <- cut(
     trace$time,
     breaks = phases_df$start_time,
-    labels = head(phases_df$phase, -1),
+    labels = utils::head(phases_df$phase, -1),
     include.lowest = TRUE
   )
 
-  phases_df <- head(phases_df, -1)
+  phases_df <- utils::head(phases_df, -1)
   trace$phase <- factor(trace$phase, levels = phases_df$phase)
   phases_df$phase <- factor(phases_df$phase, levels = phases_df$phase)
 
@@ -187,11 +199,11 @@ parse_CMJ <- function(time,
   trace$sub_phase <- cut(
     trace$time,
     breaks = sub_phases_df$start_time,
-    labels = head(sub_phases_df$sub_phase, -1),
+    labels = utils::head(sub_phases_df$sub_phase, -1),
     include.lowest = TRUE
   )
 
-  sub_phases_df <- head(sub_phases_df, -1)
+  sub_phases_df <- utils::head(sub_phases_df, -1)
   trace$sub_phase <- factor(trace$sub_phase, levels = sub_phases_df$sub_phase)
   sub_phases_df$sub_phase <- factor(sub_phases_df$sub_phase, levels = sub_phases_df$sub_phase)
 

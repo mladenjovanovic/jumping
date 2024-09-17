@@ -16,7 +16,7 @@ force_over_time(mass, weight = mass * 9.81, take_off_velocity, time_taken)
 \item{time_taken}{Numeric vector}
 }
 \value{
-Numeric vector
+Numeric vector in Newtons
 }
 \description{
 Function \code{force_over_time} calculates mean force over push-off time using impulse equation

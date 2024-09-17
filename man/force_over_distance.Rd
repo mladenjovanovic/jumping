@@ -21,7 +21,7 @@ force_over_distance(
 \item{push_off_distance}{Numeric vector}
 }
 \value{
-Numeric vector
+Numeric vector in Newtons
 }
 \description{
 Function \code{force_over_distance} calculates mean force over push-off distance using work equation
