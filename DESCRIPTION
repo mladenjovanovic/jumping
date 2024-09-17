@@ -17,4 +17,5 @@ Imports:
     magrittr,
     numDeriv,
     rootSolve,
-    stats
+    stats,
+    utils
