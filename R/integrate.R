@@ -27,7 +27,7 @@ integrate <- function(x, y, cumulative = FALSE, reverse = FALSE) {
     xs <- x
     ys <- y
   } else {
-    xs <- -rev(x)
+    xs <- rev(x)
     ys <- rev(y)
   }
 
@@ -37,7 +37,7 @@ integrate <- function(x, y, cumulative = FALSE, reverse = FALSE) {
     surface <- sum((xs[-1] - xs[-length(xs)]) * (ys[-1] + ys[-length(ys)])) / 2
   }
 
-  if (reverse == TRUE) surface <- rev(surface)
+  if (reverse == TRUE) surface <- -rev(surface)
 
   surface
 }
