@@ -2,6 +2,7 @@
 #' @param x A numeric vector
 #' @param y A numeric vector
 #' @param cumulative Should the cumulative vector be returned? Default is \code{FALSE}
+#' @param reverse Should integration start from the end? Default is \code{FALSE}
 #' @returns Numeric vector
 #' @examples
 #' df <- dplyr::tibble(
@@ -19,14 +20,24 @@
 #' integrate(df$x, df$y)
 #'
 #' @export
-integrate <- function(x, y, cumulative = FALSE) {
-  ox <- order(x)
-  xs <- x[ox]
-  ys <- y[ox]
+integrate <- function(x, y, cumulative = FALSE, reverse = FALSE) {
+  ox <- order(x, decreasing = reverse)
+
+  if (reverse == FALSE) {
+    xs <- x
+    ys <- y
+  } else {
+    xs <- -rev(x)
+    ys <- rev(y)
+  }
 
   if (isTRUE(cumulative)) {
-    c(0, cumsum((xs[-1] - xs[-length(xs)]) * (ys[-1] + ys[-length(ys)])) / 2)
+    surface <- c(0, cumsum((xs[-1] - xs[-length(xs)]) * (ys[-1] + ys[-length(ys)])) / 2)
   } else {
-    sum((xs[-1] - xs[-length(xs)]) * (ys[-1] + ys[-length(ys)])) / 2
+    surface <- sum((xs[-1] - xs[-length(xs)]) * (ys[-1] + ys[-length(ys)])) / 2
   }
+
+  if (reverse == TRUE) surface <- rev(surface)
+
+  surface
 }

@@ -4,7 +4,7 @@
 \alias{integrate}
 \title{Trapezoidal integration over range of x}
 \usage{
-integrate(x, y, cumulative = FALSE)
+integrate(x, y, cumulative = FALSE, reverse = FALSE)
 }
 \arguments{
 \item{x}{A numeric vector}
@@ -12,6 +12,8 @@ integrate(x, y, cumulative = FALSE)
 \item{y}{A numeric vector}
 
 \item{cumulative}{Should the cumulative vector be returned? Default is \code{FALSE}}
+
+\item{reverse}{Should integration start from the end? Default is \code{FALSE}}
 }
 \value{
 Numeric vector
