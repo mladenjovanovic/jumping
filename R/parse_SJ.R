@@ -17,8 +17,6 @@ parse_SJ <- function(time,
   weight <- NULL
   # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-
-
   trace <- data.frame(
     time = time,
     force = force
