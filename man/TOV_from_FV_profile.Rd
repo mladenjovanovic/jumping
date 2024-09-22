@@ -32,6 +32,7 @@ model which uses vertical jump profile \code{F0} and \code{V0}.
 }
 \examples{
 TOV_from_FV_profile(F0 = 2500, V0 = 3.7, mass = 85, push_off_distance = 0.42)
+
 }
 \references{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{Samozino, Pierre. ‘A Simple Method for Measuring Lower Limb Force, Velocity and Power Capabilities During Jumping’. In Biomechanics of Training and Testing, edited by Jean-Benoit Morin and Pierre Samozino, 65–96. Cham: Springer International Publishing, 2018. https://doi.org/10.1007/978-3-319-05633-3_4.
