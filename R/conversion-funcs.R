@@ -158,7 +158,7 @@ TOV_from_force <- function(force,
 #'     Samozino, Pierre, Enrico Rejc, Pietro Enrico Di Prampero, Alain Belli, and Jean-Benoît Morin. ‘Optimal Force–Velocity Profile in Ballistic Movements—Altius’: Medicine & Science in Sports & Exercise 44, no. 2 (February 2012): 313–22. https://doi.org/10.1249/MSS.0b013e31822d757a.
 #' @examples
 #' TOV_from_FV_profile(F0 = 2500, V0 = 3.7, mass = 85, push_off_distance = 0.42)
-
+#'
 TOV_from_FV_profile <- function(F0,
                                 V0,
                                 mass,

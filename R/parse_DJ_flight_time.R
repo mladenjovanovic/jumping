@@ -138,12 +138,10 @@ parse_DJ_flight_time <- function(time,
   # Return list
   list(
     trace = trace,
-
     movement_start_time = movement_start_time,
     take_off_time = take_off_time,
     landing_time = landing_time,
     flight_time = flight_time,
     take_off_velocity = take_off_velocity
   )
-
 }

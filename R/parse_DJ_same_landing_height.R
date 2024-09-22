@@ -132,7 +132,6 @@ parse_DJ_same_landing_height <- function(time,
   # Return list
   list(
     trace = trace,
-
     movement_start_time = movement_start_time,
     take_off_time = take_off_time,
     landing_time = landing_time

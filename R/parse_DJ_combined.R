@@ -1,9 +1,9 @@
 parse_DJ_combined <- function(time,
-                                 force,
-                                 mass,
-                                 gravity_const = 9.80665,
-                                 contact_threshold = 20,
-                                 na.rm = FALSE) {
+                              force,
+                              mass,
+                              gravity_const = 9.80665,
+                              contact_threshold = 20,
+                              na.rm = FALSE) {
 
   # Solution for "no visible binding for global variable" note
   # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -20,7 +20,8 @@ parse_DJ_combined <- function(time,
     mass = mass,
     gravity_const = gravity_const,
     contact_threshold = contact_threshold,
-    na.rm = na.rm)
+    na.rm = na.rm
+  )
 
   flight_time_method <- parse_DJ_flight_time(
     time = time,
@@ -28,14 +29,15 @@ parse_DJ_combined <- function(time,
     mass = mass,
     gravity_const = gravity_const,
     contact_threshold = contact_threshold,
-    na.rm = na.rm)
+    na.rm = na.rm
+  )
 
   # Combine the two
   trace <- same_height_method$trace %>%
     dplyr::mutate(
       velocity_height_method = same_height_method$trace$velocity,
-      velocity_ft_method =  flight_time_method$trace$velocity,
-      velocity = (velocity_height_method + velocity_ft_method)/2
+      velocity_ft_method = flight_time_method$trace$velocity,
+      velocity = (velocity_height_method + velocity_ft_method) / 2
     )
 
   # ==================================
@@ -61,10 +63,8 @@ parse_DJ_combined <- function(time,
   # Return list
   list(
     trace = trace,
-
     movement_start_time = same_height_method$movement_start_time,
     take_off_time = same_height_method$take_off_time,
     landing_time = same_height_method$landing_time
   )
-
 }
