@@ -4,6 +4,7 @@ parse_SJ <- function(time,
                      gravity_const = 9.80665,
                      start_threshold = 20,
                      contact_threshold = 20,
+                     only_upper = FALSE,
                      start_time = NULL,
                      na.rm = FALSE) {
 
@@ -55,10 +56,17 @@ parse_SJ <- function(time,
     upper_start_threshold <- mass * gravity_const + start_threshold
     lower_start_threshold <- mass * gravity_const - start_threshold
 
-    propulsive_phase_index <- longest_TRUE_streak(
-      before_peak_trace$force <= upper_start_threshold &
-        before_peak_trace$force >= lower_start_threshold
-    )
+    if (only_upper == FALSE) {
+      propulsive_phase_index <- longest_TRUE_streak(
+        before_peak_trace$force <= upper_start_threshold &
+          before_peak_trace$force >= lower_start_threshold
+      )
+    } else {
+      propulsive_phase_index <- longest_TRUE_streak(
+        before_peak_trace$force <= upper_start_threshold
+      )
+    }
+
 
     propulsive_phase_time <- before_peak_trace$time[propulsive_phase_index]
     movement_start_time <- propulsive_phase_time[2]
