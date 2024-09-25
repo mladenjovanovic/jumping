@@ -23,6 +23,10 @@ parse_DJ <- function(time,
     )
   } else if (method[1] == "landing-heights") {
     # Landing heights method
+    if (!is.null(end_time)) {
+      warning("Argument `end_time` is provided, but not used in `landing-heights` method. Please use `known-end` method")
+    }
+
     res <- parse_DJ_same_landing_height(
       time = time,
       force = force,
@@ -33,6 +37,9 @@ parse_DJ <- function(time,
     )
   } else if (method[1] == "flight-time") {
     # Flight time method
+    if (!is.null(end_time)) {
+      warning("Argument `end_time` is provided, but not used in `flight-time` method. Please use `known-end` method")
+    }
     res <- parse_DJ_flight_time(
       time = time,
       force = force,
@@ -43,6 +50,10 @@ parse_DJ <- function(time,
     )
   } else if (method[1] == "ft-landing-combined") {
     # Combined method
+    if (!is.null(end_time)) {
+      warning("Argument `end_time` is provided, but not used in `ft-landing-combined` method. Please use `known-end` method")
+    }
+
     res <- parse_DJ_combined(
       time = time,
       force = force,
