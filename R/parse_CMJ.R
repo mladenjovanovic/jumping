@@ -191,7 +191,7 @@ parse_CMJ <- function(time,
     "Flight phase [ascent]", take_off_time, jump_peak_time,
     "Flight phase [descent]", jump_peak_time, landing_time,
     "Landing phase [impact]", landing_time, impact_peak_time,
-    "Landing phase (stabilization)", impact_peak_time, catch_time,
+    "Landing phase [stabilization]", impact_peak_time, catch_time,
     "After CMJ", catch_time, stop_time,
     "", stop_time, Inf
   )
