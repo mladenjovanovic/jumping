@@ -141,12 +141,12 @@ parse_CMJ <- function(time,
     "Movement Start", movement_start_time,
     "Max Negative Acceleration", max_negative_acceleration_time,
     "Max Downward Velocity", max_downward_velocity_time,
-    "Lowest point", lowest_point_time,
+    "Lowest Point", lowest_point_time,
     "Max Upward Velocity", max_upward_velocity_time,
-    "Take off", take_off_time,
-    "Peak of the jump", jump_peak_time,
+    "Take-off", take_off_time,
+    "Peak of the Jump", jump_peak_time,
     "Landing", landing_time,
-    "Impact peak", impact_peak_time,
+    "Impact Peak", impact_peak_time,
     "Catch", catch_time
   )
 

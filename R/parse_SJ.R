@@ -149,10 +149,10 @@ parse_SJ <- function(time,
     ~moment, ~time,
     "Movement Start", movement_start_time,
     "Max Upward Velocity", max_upward_velocity_time,
-    "Take off", take_off_time,
-    "Peak of the jump", jump_peak_time,
+    "Take-off", take_off_time,
+    "Peak of the Jump", jump_peak_time,
     "Landing", landing_time,
-    "Impact peak", impact_peak_time,
+    "Impact Peak", impact_peak_time,
     "Catch", catch_time
   )
 
