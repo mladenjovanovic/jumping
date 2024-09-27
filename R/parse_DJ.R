@@ -71,6 +71,15 @@ parse_DJ <- function(time,
 
   trace <- res$trace
 
+  # Add additional kinematics
+  trace <- trace %>%
+  dplyr::mutate(
+    impulse = integrate(time, force, cumulative = TRUE),
+    impulse_net = integrate(time, force_net, cumulative = TRUE),
+    power = force * velocity,
+    work = integrate(time, power, cumulative = TRUE)
+  )
+
   drop_start_index <- which(trace$velocity != 0)[1]
   drop_start_time <- trace$time[drop_start_index]
 
