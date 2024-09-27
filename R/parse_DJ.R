@@ -104,6 +104,9 @@ parse_DJ <- function(time,
   take_off_time <- res$take_off_time
   landing_time <- res$landing_time
 
+  # Add time from take off
+  trace$time_from_take_off <- trace$time - take_off_time
+
   # Moments
   moments_df <- dplyr::tribble(
     ~moment, ~time,
