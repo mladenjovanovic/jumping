@@ -4,6 +4,7 @@ parse_CMJ <- function(time,
                       gravity_const = 9.80665,
                       start_threshold = 20,
                       contact_threshold = 20,
+                      only_lower = TRUE,
                       start_time = NULL,
                       na.rm = FALSE) {
 
@@ -52,16 +53,30 @@ parse_CMJ <- function(time,
         time < max_force_time
       )
 
-    # Find start of the motion
+    # Find thresholds
     upper_start_threshold <- mass * gravity_const + start_threshold
     lower_start_threshold <- mass * gravity_const - start_threshold
 
-    unloading_phase_index <- longest_TRUE_streak(before_peak_trace$force < lower_start_threshold)
+    if (only_lower == TRUE) {
+      # Use only lower threshold
+      # Find start of the motion
+      unloading_phase_index <- longest_TRUE_streak(before_peak_trace$force < lower_start_threshold)
 
-    unloading_phase_time <- before_peak_trace$time[unloading_phase_index]
+      unloading_phase_time <- before_peak_trace$time[unloading_phase_index]
+      movement_start_time <- unloading_phase_time[1]
+    } else {
 
-    movement_start_time <- unloading_phase_time[1]
+      # Use either lower or upper threshold
+      steady_phase_index <- longest_TRUE_streak(
+        before_peak_trace$force <= upper_start_threshold &
+          before_peak_trace$force >= lower_start_threshold
+      )
+
+      steady_phase_time <- before_peak_trace$time[steady_phase_index]
+      movement_start_time <- steady_phase_time[2]
+    }
   } else {
+    # If user provided start time, use that
     movement_start_time <- start_time
   }
 
