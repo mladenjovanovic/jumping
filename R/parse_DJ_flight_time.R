@@ -16,10 +16,11 @@ parse_DJ_flight_time <- function(time,
   height_from_start <- NULL
   # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-
   trace <- data.frame(
     time = time,
-    force = force
+    force = force,
+    mass = mass,
+    gravity_const
   )
 
   if (na.rm == TRUE) trace <- trace %>% stats::na.omit()

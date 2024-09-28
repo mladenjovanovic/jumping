@@ -18,7 +18,9 @@ parse_DJ_same_landing_height <- function(time,
 
   trace <- data.frame(
     time = time,
-    force = force
+    force = force,
+    mass = mass,
+    gravity_const
   )
 
   if (na.rm == TRUE) trace <- trace %>% stats::na.omit()
