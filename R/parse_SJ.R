@@ -57,26 +57,21 @@ parse_SJ <- function(time,
     lower_start_threshold <- mass * gravity_const - start_threshold
 
     if (only_upper == FALSE) {
-      propulsive_phase_index <- longest_TRUE_streak(
+      stead_phase_index <- longest_TRUE_streak(
         before_peak_trace$force <= upper_start_threshold &
           before_peak_trace$force >= lower_start_threshold
       )
     } else {
-      propulsive_phase_index <- longest_TRUE_streak(
+      stead_phase_index <- longest_TRUE_streak(
         before_peak_trace$force <= upper_start_threshold
       )
     }
 
-
-    propulsive_phase_time <- before_peak_trace$time[propulsive_phase_index]
-    movement_start_time <- propulsive_phase_time[2]
+    stead_phase_time <- before_peak_trace$time[stead_phase_index]
+    movement_start_time <- stead_phase_time[2]
   } else {
     movement_start_time <- start_time
   }
-  # ----- Orig
-  # propulsive_phase_index <- longest_TRUE_streak(before_peak_trace$force > upper_start_threshold)
-  # propulsive_phase_time <- before_peak_trace$time[propulsive_phase_index]
-  # movement_start_time <-  propulsive_phase_time[1]
 
   # =============================================
   # Create kinematics traces
