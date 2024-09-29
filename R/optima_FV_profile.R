@@ -11,13 +11,20 @@
 #' @return A named numeric vector with estimated optimal \code{F0} and \code{V0} parameter values
 #' @export
 #' @references
-#'     Samozino, Pierre. ‘A Simple Method for Measuring Lower Limb Force, Velocity and Power Capabilities During Jumping’. In Biomechanics of Training and Testing, edited by Jean-Benoit Morin and Pierre Samozino, 65–96. Cham: Springer International Publishing, 2018. https://doi.org/10.1007/978-3-319-05633-3_4.
+#'     Samozino, Pierre. ‘A Simple Method for Measuring Lower Limb Force, Velocity and Power Capabilities During Jumping’.
+#'         In Biomechanics of Training and Testing, edited by Jean-Benoit Morin and Pierre Samozino, 65–96. Cham: Springer
+#'         International Publishing, 2018. https://doi.org/10.1007/978-3-319-05633-3_4.
 #'
-#'     ———. ‘Optimal Force-Velocity Profile in Ballistic Push-off: Measurement and Relationship with Performance’. In Biomechanics of Training and Testing, edited by Jean-Benoit Morin and Pierre Samozino, 97–119. Cham: Springer International Publishing, 2018. https://doi.org/10.1007/978-3-319-05633-3_5.
+#'     ———. ‘Optimal Force-Velocity Profile in Ballistic Push-off: Measurement and Relationship with Performance’.
+#'      In Biomechanics of Training and Testing, edited by Jean-Benoit Morin and Pierre Samozino, 97–119.
+#'       Cham: Springer International Publishing, 2018. https://doi.org/10.1007/978-3-319-05633-3_5.
 #'
-#'     Samozino, Pierre, Jean-Benoît Morin, Frédérique Hintzy, and Alain Belli. ‘Jumping Ability: A Theoretical Integrative Approach’. Journal of Theoretical Biology 264, no. 1 (May 2010): 11–18. https://doi.org/10.1016/j.jtbi.2010.01.021.
+#'     Samozino, Pierre, Jean-Benoît Morin, Frédérique Hintzy, and Alain Belli. ‘Jumping Ability: A Theoretical Integrative Approach’.
+#'      Journal of Theoretical Biology 264, no. 1 (May 2010): 11–18. https://doi.org/10.1016/j.jtbi.2010.01.021.
 #'
-#'     Samozino, Pierre, Enrico Rejc, Pietro Enrico Di Prampero, Alain Belli, and Jean-Benoît Morin. ‘Optimal Force–Velocity Profile in Ballistic Movements—Altius’: Medicine & Science in Sports & Exercise 44, no. 2 (February 2012): 313–22. https://doi.org/10.1249/MSS.0b013e31822d757a.
+#'     Samozino, Pierre, Enrico Rejc, Pietro Enrico Di Prampero, Alain Belli, and Jean-Benoît Morin.
+#'      ‘Optimal Force–Velocity Profile in Ballistic Movements—Altius’.
+#'       Medicine & Science in Sports & Exercise 44, no. 2 (February 2012): 313–22. https://doi.org/10.1249/MSS.0b013e31822d757a.
 #' @examples
 #' optimal_FV_profile(F0 = 2500, V0 = 3.7, mass = 85, push_off_distance = 0.42)
 
