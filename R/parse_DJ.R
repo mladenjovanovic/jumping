@@ -120,7 +120,7 @@ parse_DJ <- function(time,
   moments_df <- dplyr::tribble(
     ~moment, ~time,
     "Drop Start", drop_start_time,
-    "Drop Landing", drop_landing_time,
+    "Movement Start", drop_landing_time,
     "Max Downward Velocity", max_downward_velocity_time,
     "Lowest Point", lowest_point_time,
     "Max Upward Velocity", max_upward_velocity_time,
