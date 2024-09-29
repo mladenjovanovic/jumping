@@ -6,6 +6,15 @@ parse_DJ <- function(time,
                      method = c("landing-heights", "flight-time", "ft-landing-combined", "known-end"),
                      end_time = NULL,
                      na.rm = FALSE) {
+
+  # Solution for "no visible binding for global variable" note
+  # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  force_net <- NULL
+  power <- NULL
+  velocity <- NULL
+  # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
   if (method[1] == "known-end") {
     # Known end method
     if (is.null(end_time)) {
