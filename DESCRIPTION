@@ -18,4 +18,5 @@ Imports:
     numDeriv,
     rootSolve,
     stats,
+    tidyr,
     utils
