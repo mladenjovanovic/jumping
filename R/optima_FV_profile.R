@@ -1,0 +1,66 @@
+#' Get Optimal Profile Force-Velocity Profile
+#'
+#'  \code{optimal_FV_profile} finds optimal Force-Velocity profile that maximizes vertical jump height based on the model of
+#'  Samozino \emph{et al.}. According to this model, we are looking for Force-Velocity profile that maintains the max power, but changes
+#'  \code{F0} and \code{V0} so it maximized the take-off velocity calculated using \code{\link{TOV_from_FV_profile}}.
+#' @param F0 A numeric scalar in Newtons
+#' @param V0 A numeric scalar in m/s
+#' @param mass A Numeric scalar in kg
+#' @param push_off_distance A numeric scalar in meters. Default 0.4m
+#' @param gravity_const Numeric value. Default 9.81
+#' @return A named numeric vector with estimated optimal \code{F0} and \code{V0} parameter values
+#' @export
+#' @references
+#'     Samozino, Pierre. ‘A Simple Method for Measuring Lower Limb Force, Velocity and Power Capabilities During Jumping’. In Biomechanics of Training and Testing, edited by Jean-Benoit Morin and Pierre Samozino, 65–96. Cham: Springer International Publishing, 2018. https://doi.org/10.1007/978-3-319-05633-3_4.
+#'
+#'     ———. ‘Optimal Force-Velocity Profile in Ballistic Push-off: Measurement and Relationship with Performance’. In Biomechanics of Training and Testing, edited by Jean-Benoit Morin and Pierre Samozino, 97–119. Cham: Springer International Publishing, 2018. https://doi.org/10.1007/978-3-319-05633-3_5.
+#'
+#'     Samozino, Pierre, Jean-Benoît Morin, Frédérique Hintzy, and Alain Belli. ‘Jumping Ability: A Theoretical Integrative Approach’. Journal of Theoretical Biology 264, no. 1 (May 2010): 11–18. https://doi.org/10.1016/j.jtbi.2010.01.021.
+#'
+#'     Samozino, Pierre, Enrico Rejc, Pietro Enrico Di Prampero, Alain Belli, and Jean-Benoît Morin. ‘Optimal Force–Velocity Profile in Ballistic Movements—Altius’: Medicine & Science in Sports & Exercise 44, no. 2 (February 2012): 313–22. https://doi.org/10.1249/MSS.0b013e31822d757a.
+#' @examples
+#' optimal_FV_profile(F0 = 2500, V0 = 3.7, mass = 85, push_off_distance = 0.42)
+
+optimal_FV_profile <- function(F0,
+                               V0,
+                               mass,
+                               push_off_distance = 0.4,
+                               gravity_const = 9.81) {
+
+  # function to be used by optim function
+  opt_jump_func <- function(par) {
+    new_F0 <- F0 / par[1]
+    new_V0 <- V0 * par[1]
+
+      take_off_velocity <- TOV_from_FV_profile(
+      F0 = new_F0,
+      V0 = new_V0,
+      mass = mass,
+      push_off_distance,
+      gravity_const
+    )
+    return(1 / take_off_velocity)
+  }
+
+  upper_bound <- (F0 / mass) / gravity_const
+  get_optim_model <- function() {
+    tryCatch(
+      {
+        stats::optim(par = 1, fn = opt_jump_func, method = "Brent", lower = 0, upper = upper_bound)
+      },
+      error = function(cond) {
+        return(list(par = NA, value = NA))
+      },
+      warning = function(cond) {
+        return(list(par = NA, value = NA))
+      }
+    )
+  }
+
+  results <- get_optim_model()
+
+  optimal_F0 <- F0 / results$par[1]
+  optimal_V0 <- V0 * results$par[1]
+
+  c("Optimal F0" = optimal_F0, "Optimal V0" = optimal_V0)
+}
