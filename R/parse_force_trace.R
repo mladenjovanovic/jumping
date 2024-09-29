@@ -1,4 +1,4 @@
-parse_kinematics <- function(time,
+parse_force_trace <- function(time,
                              force,
                              mass,
                              gravity_const = 9.80665,
