@@ -21,7 +21,7 @@ parse_DJ_known_end <- function(time,
     time = time,
     force = force,
     mass = mass,
-    gravity_const
+    gravity_const = gravity_const
   )
 
   if (na.rm == TRUE) trace <- trace %>% stats::na.omit()
