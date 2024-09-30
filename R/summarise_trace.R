@@ -213,10 +213,14 @@ summarise_trace <- function(trace, left_force = NULL, right_force = NULL) {
   concentric_mean_power <- concentric_work / concentric_phase_duration
   eccentric_mean_power <- eccentric_work / eccentric_phase_duration
 
+  # Additional variables for mean force over distance
+  concentric_mean_force_distance <- concentric_work / concentric_phase_displacement
+  eccentric_mean_force_distance <- eccentric_work / eccentric_phase_displacement
+
   # Composite variables
   # -----------------
 
-  landing_take_off_displacement_difference <- take_off_displacement - landing_displacement
+  landing_take_off_displacement_difference <- landing_displacement - take_off_displacement
   explosive_index <- take_off_velocity / movement_duration
   RSI <- jump_height_imp_mom / movement_duration
   RSImod <- flight_duration / movement_duration
@@ -257,7 +261,9 @@ summarise_trace <- function(trace, left_force = NULL, right_force = NULL) {
       eccentric_end_force = eccentric_end_force,
       landing_peak_force = landing_peak_force,
       concentric_mean_force = concentric_mean_force,
+      concentric_mean_force_distance = concentric_mean_force_distance,
       eccentric_mean_force = eccentric_mean_force,
+      eccentric_mean_force_distance = eccentric_mean_force_distance,
       landing_mean_force = landing_mean_force,
 
       # Impulses
