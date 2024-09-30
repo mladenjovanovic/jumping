@@ -24,30 +24,30 @@ plot_jump <- function(jump,
       variable = factor(variable, levels = variables)
     )
 
-  # Phases
-  phases_long <- trace_long %>%
-    dplyr::group_by(phase, variable) %>%
-    dplyr::summarise(
-      start = min(.data[[x_var]]),
-      stop = max(.data[[x_var]])
-    ) %>%
-    dplyr::ungroup()
-
-  values_range <- trace_long %>%
-    dplyr::group_by(variable) %>%
-    dplyr::summarise(
-      max_value = max(value),
-      min_value = min(value)
-    ) %>%
-    dplyr::ungroup()
-
-  phases_long <- phases_long %>%
-    dplyr::left_join(values_range, by = "variable")
-
   gg <- trace_long %>%
     ggplot2::ggplot()
 
   if (plot_phases) {
+    # Phases
+    phases_long <- trace_long %>%
+      dplyr::group_by(phase, variable) %>%
+      dplyr::summarise(
+        start = min(.data[[x_var]]),
+        stop = max(.data[[x_var]])
+      ) %>%
+      dplyr::ungroup()
+
+    values_range <- trace_long %>%
+      dplyr::group_by(variable) %>%
+      dplyr::summarise(
+        max_value = max(value),
+        min_value = min(value)
+      ) %>%
+      dplyr::ungroup()
+
+    phases_long <- phases_long %>%
+      dplyr::left_join(values_range, by = "variable")
+
     gg <- gg +
       ggplot2::geom_rect(
         data = phases_long,
