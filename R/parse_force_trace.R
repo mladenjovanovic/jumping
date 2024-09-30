@@ -61,7 +61,7 @@ parse_force_trace <- function(time,
       force_net = force - weight,
       acceleration = force_net / mass,
       # Make acceleration before movement start time equal to 0
-      acceleration = dplyr::if_else(time <= movement_start_time, 0, acceleration),
+      acceleration = dplyr::if_else(time < movement_start_time, 0, acceleration),
       velocity = start_velocity + integrate(time, acceleration, cumulative = TRUE),
       height_from_start = start_height + integrate(time, velocity, cumulative = TRUE),
       impulse = integrate(time, force, cumulative = TRUE),
