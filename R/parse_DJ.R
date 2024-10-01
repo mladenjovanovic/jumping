@@ -113,8 +113,9 @@ parse_DJ <- function(time,
   impact_peak_index <- which.max(landing_trace$force)
   impact_peak_time <- landing_trace$time[impact_peak_index]
 
-  catch_index <-  which.min(landing_trace$height_from_take_off)
-  catch_time <- landing_trace$time[catch_index]
+  #catch_index <-  which.min(landing_trace$height_from_take_off)
+  #catch_time <- landing_trace$time[catch_index]
+  catch_time <- landing_trace$time[ceiling(zero_crossings(x = landing_trace$velocity)[1])]
 
   start_time <- trace$time[1]
   stop_time <- trace$time[length(trace$time)]

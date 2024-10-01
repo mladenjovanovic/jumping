@@ -136,7 +136,8 @@ parse_SJ <- function(time,
   landing_trace <- trace %>%
     dplyr::filter(time > impact_peak_time)
 
-  catch_time <- landing_trace$time[[which.min(landing_trace$height_from_start)]]
+  #catch_time <- landing_trace$time[[which.min(landing_trace$height_from_start)]]
+  catch_time <- landing_trace$time[ceiling(zero_crossings(x = landing_trace$velocity)[1])]
 
   start_time <- trace$time[1]
   stop_time <- trace$time[length(trace$time)]
