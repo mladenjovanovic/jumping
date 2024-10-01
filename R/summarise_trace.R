@@ -158,6 +158,7 @@ summarise_trace <- function(trace, left_force = NULL, right_force = NULL) {
     dplyr::filter(phase == "Flight phase", variable == "velocity") %>%
     dplyr::pull(start)
 
+  flight_duration_imp_mom <- FT_from_TOV(take_off_velocity, gravity_const)
 
   # Displacements
   # -----------------
@@ -221,9 +222,8 @@ summarise_trace <- function(trace, left_force = NULL, right_force = NULL) {
   # -----------------
 
   landing_take_off_displacement_difference <- landing_displacement - take_off_displacement
-  explosive_index <- take_off_velocity / movement_duration
   RSI <- jump_height_imp_mom / movement_duration
-  RSImod <- flight_duration / movement_duration
+  RSImod <- flight_duration_imp_mom / movement_duration
   ecc_conc_ratio <- eccentric_phase_duration / concentric_phase_duration
 
   eccentric_stiffness <- -(eccentric_end_force - eccentric_minimum_force) / eccentric_phase_displacement
@@ -252,6 +252,7 @@ summarise_trace <- function(trace, left_force = NULL, right_force = NULL) {
       unweighting_phase_duration = unweighting_phase_duration,
       breaking_phase_duration = breaking_phase_duration,
       flight_duration = flight_duration,
+      flight_duration_imp_mom = flight_duration_imp_mom,
       landing_duration = landing_duration,
 
       # Forces
@@ -300,7 +301,6 @@ summarise_trace <- function(trace, left_force = NULL, right_force = NULL) {
 
       # Composite variables
       landing_take_off_displacement_difference = landing_take_off_displacement_difference,
-      explosive_index =  explosive_index,
       RSI = RSI,
       RSImod = RSImod,
       ecc_conc_ratio = ecc_conc_ratio,
