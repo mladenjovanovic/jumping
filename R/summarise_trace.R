@@ -19,7 +19,6 @@ summarise_trace <- function(trace, left_force = NULL, right_force = NULL, na.rm 
   by_moment <- trace_long %>%
     dplyr::filter(!is.na(moment))
 
-  browser()
   by_phase <- trace_long %>%
     dplyr::group_by(phase, variable) %>%
     summarise(
