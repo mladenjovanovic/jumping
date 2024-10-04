@@ -1,4 +1,4 @@
-summarise_trace <- function(trace, left_force = NULL, right_force = NULL) {
+summarise_trace <- function(trace, left_force = NULL, right_force = NULL, na.rm = FALSE) {
 
   # Solution for "no visible binding for global variable" note
   # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -19,19 +19,20 @@ summarise_trace <- function(trace, left_force = NULL, right_force = NULL) {
   by_moment <- trace_long %>%
     dplyr::filter(!is.na(moment))
 
+  browser()
   by_phase <- trace_long %>%
     dplyr::group_by(phase, variable) %>%
     summarise(
       start = utils::head(value, 1),
       stop = utils::tail(value, 1),
       difference = stop - start,
-      min = min(value),
-      max = max(value),
+      min = min(value, na.rm = na.rm),
+      max = max(value, na.rm = na.rm),
       range = max - min,
-      mean = mean(value),
-      median = median(value),
-      SD = stats::sd(value),
-      IQR = stats::IQR(value)
+      mean = mean(value, na.rm = na.rm),
+      median = median(value, na.rm = na.rm),
+      SD = stats::sd(value, na.rm = na.rm),
+      IQR = stats::IQR(value, na.rm = na.rm)
     ) %>%
     dplyr::ungroup()
 
@@ -41,13 +42,13 @@ summarise_trace <- function(trace, left_force = NULL, right_force = NULL) {
       start = utils::head(value, 1),
       stop = utils::tail(value, 1),
       difference = stop - start,
-      min = min(value),
-      max = max(value),
+      min = min(value, na.rm = na.rm),
+      max = max(value, na.rm = na.rm),
       range = max - min,
-      mean = mean(value),
-      median = median(value),
-      SD = stats::sd(value),
-      IQR = stats::IQR(value)
+      mean = mean(value, na.rm = na.rm),
+      median = median(value, na.rm = na.rm),
+      SD = stats::sd(value, na.rm = na.rm),
+      IQR = stats::IQR(value, na.rm = na.rm)
     ) %>%
     dplyr::ungroup()
 
