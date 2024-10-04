@@ -12,6 +12,7 @@ parse_DJ <- function(time,
   force_net <- NULL
   power <- NULL
   velocity <- NULL
+  dropping_velocity <- NULL
   # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
@@ -198,6 +199,10 @@ parse_DJ <- function(time,
   sub_phases_df <- utils::head(sub_phases_df, -1)
   trace$sub_phase <- factor(trace$sub_phase, levels = sub_phases_df$sub_phase)
   sub_phases_df$sub_phase <- factor(sub_phases_df$sub_phase, levels = sub_phases_df$sub_phase)
+
+  # Temporarily remove dropping_velocity
+  trace <- trace %>%
+    dplyr::select(-dropping_velocity)
 
   # Return
   list(trace = trace, moments = moments_df, phases = phases_df, sub_phases = sub_phases_df)
