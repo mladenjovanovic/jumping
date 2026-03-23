@@ -1,13 +1,12 @@
 parse_hexbar_jump <- function(time,
-                     force,
-                     mass,
-                     gravity_const = 9.80665,
-                     start_threshold = 20,
-                     contact_threshold = 20,
-                     only_upper = FALSE,
-                     start_time = NULL,
-                     na.rm = FALSE) {
-
+                              force,
+                              mass,
+                              gravity_const = 9.80665,
+                              start_threshold = 20,
+                              contact_threshold = 20,
+                              only_upper = FALSE,
+                              start_time = NULL,
+                              na.rm = FALSE) {
   # Solution for "no visible binding for global variable" note
   # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   acceleration <- NULL
@@ -17,7 +16,6 @@ parse_hexbar_jump <- function(time,
   velocity <- NULL
   weight <- NULL
   # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
   trace <- data.frame(
     time = time,
     force = force,
@@ -131,10 +129,13 @@ parse_hexbar_jump <- function(time,
 
   jump_peak_time <- trace$time[[which.max(trace$height_from_start)]]
   landing_time <- trace$time[[flight_phase_index[2] + 1]]
-  impact_peak_time <- trace$time[[which.max(trace$force)]]
 
-  landing_trace <- trace %>%
-    dplyr::filter(time > impact_peak_time)
+  after_landing_trace <- trace %>%
+    dplyr::filter(
+      time >= landing_time
+    )
+
+  impact_peak_time <- after_landing_trace$time[[which.max(after_landing_trace$force)]]
 
   start_time <- trace$time[1]
   stop_time <- trace$time[length(trace$time)]
