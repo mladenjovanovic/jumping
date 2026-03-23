@@ -21,7 +21,7 @@
 #'
 #' @export
 integrate <- function(x, y, cumulative = FALSE, reverse = FALSE) {
-  ox <- order(x, decreasing = reverse)
+  # ox <- order(x, decreasing = reverse)
 
   if (reverse == FALSE) {
     xs <- x
