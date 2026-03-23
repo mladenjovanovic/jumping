@@ -3,7 +3,6 @@ plot_jump <- function(jump,
                       variables = c("force", "acceleration", "velocity", "height_from_take_off"),
                       plot_phases = TRUE,
                       plot_moments = TRUE) {
-
   # Solution for "no visible binding for global variable" note
   # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   variable <- NULL
@@ -72,7 +71,7 @@ plot_jump <- function(jump,
         size = 1,
         fill = "white"
       ) #+
-      #ggplot2::scale_shape_manual(na.value = NA, values = rep(21, 100))
+    # ggplot2::scale_shape_manual(na.value = NA, values = rep(21, 100))
   }
 
   gg <- gg +

@@ -1,13 +1,12 @@
 parse_force_trace <- function(time,
-                             force,
-                             mass,
-                             gravity_const = 9.80665,
-                             threshold_type = c("both", "upper", "lower"),
-                             start_threshold = 20,
-                             start_velocity = 0,
-                             start_height = 0,
-                             na.rm = FALSE) {
-
+                              force,
+                              mass,
+                              gravity_const = 9.80665,
+                              threshold_type = c("both", "upper", "lower"),
+                              start_threshold = 20,
+                              start_velocity = 0,
+                              start_height = 0,
+                              na.rm = FALSE) {
   # Solution for "no visible binding for global variable" note
   # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   acceleration <- NULL
@@ -71,6 +70,4 @@ parse_force_trace <- function(time,
     )
 
   trace
-
-
 }

@@ -7,7 +7,6 @@ parse_CMJ <- function(time,
                       only_lower = TRUE,
                       start_time = NULL,
                       na.rm = FALSE) {
-
   # Solution for "no visible binding for global variable" note
   # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   acceleration <- NULL
@@ -67,7 +66,6 @@ parse_CMJ <- function(time,
       unloading_phase_time <- before_peak_trace$time[unloading_phase_index]
       movement_start_time <- unloading_phase_time[1]
     } else {
-
       # Use either lower or upper threshold
       steady_phase_index <- longest_TRUE_streak(
         before_peak_trace$force <= upper_start_threshold &
@@ -147,7 +145,7 @@ parse_CMJ <- function(time,
   landing_trace <- trace %>%
     dplyr::filter(time > impact_peak_time)
 
-  #catch_time <- landing_trace$time[[which.min(landing_trace$height_from_start)]]
+  # catch_time <- landing_trace$time[[which.min(landing_trace$height_from_start)]]
   catch_time <- landing_trace$time[ceiling(zero_crossings(x = landing_trace$velocity)[1])]
 
   start_time <- trace$time[1]

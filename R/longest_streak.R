@@ -1,6 +1,5 @@
 # Get all streaks
 get_streaks <- function(x) {
-
   # Solution for "no visible binding for global variable" note
   # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   lagged_x <- NULL

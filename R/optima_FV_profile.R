@@ -27,19 +27,17 @@
 #'       Medicine & Science in Sports & Exercise 44, no. 2 (February 2012): 313–22. https://doi.org/10.1249/MSS.0b013e31822d757a.
 #' @examples
 #' optimal_FV_profile(F0 = 2500, V0 = 3.7, mass = 85, push_off_distance = 0.42)
-
 optimal_FV_profile <- function(F0,
                                V0,
                                mass,
                                push_off_distance = 0.4,
                                gravity_const = 9.81) {
-
   # function to be used by optim function
   opt_jump_func <- function(par) {
     new_F0 <- F0 / par[1]
     new_V0 <- V0 * par[1]
 
-      take_off_velocity <- TOV_from_FV_profile(
+    take_off_velocity <- TOV_from_FV_profile(
       F0 = new_F0,
       V0 = new_V0,
       mass = mass,

@@ -1,5 +1,4 @@
 summarise_trace <- function(trace, left_force = NULL, right_force = NULL, na.rm = FALSE) {
-
   # Solution for "no visible binding for global variable" note
   # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   moment <- NULL

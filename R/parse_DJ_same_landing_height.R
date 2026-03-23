@@ -4,7 +4,6 @@ parse_DJ_same_landing_height <- function(time,
                                          gravity_const = 9.80665,
                                          contact_threshold = 20,
                                          na.rm = FALSE) {
-
   # Solution for "no visible binding for global variable" note
   # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   weight <- NULL

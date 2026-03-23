@@ -5,7 +5,6 @@ parse_DJ_known_end <- function(time,
                                contact_threshold = 20,
                                end_time,
                                na.rm = FALSE) {
-
   # Solution for "no visible binding for global variable" note
   # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   weight <- NULL

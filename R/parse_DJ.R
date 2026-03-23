@@ -6,7 +6,6 @@ parse_DJ <- function(time,
                      method = c("landing-heights", "flight-time", "ft-landing-combined", "known-end"),
                      end_time = NULL,
                      na.rm = FALSE) {
-
   # Solution for "no visible binding for global variable" note
   # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   force_net <- NULL
@@ -83,12 +82,12 @@ parse_DJ <- function(time,
 
   # Add additional kinematics
   trace <- trace %>%
-  dplyr::mutate(
-    impulse = integrate(time, force, cumulative = TRUE),
-    impulse_net = integrate(time, force_net, cumulative = TRUE),
-    power = force * velocity,
-    work = integrate(time, power, cumulative = TRUE)
-  )
+    dplyr::mutate(
+      impulse = integrate(time, force, cumulative = TRUE),
+      impulse_net = integrate(time, force_net, cumulative = TRUE),
+      power = force * velocity,
+      work = integrate(time, power, cumulative = TRUE)
+    )
 
   drop_start_index <- which(trace$velocity != 0)[1]
   drop_start_time <- trace$time[drop_start_index]
@@ -114,8 +113,8 @@ parse_DJ <- function(time,
   impact_peak_index <- which.max(landing_trace$force)
   impact_peak_time <- landing_trace$time[impact_peak_index]
 
-  #catch_index <-  which.min(landing_trace$height_from_take_off)
-  #catch_time <- landing_trace$time[catch_index]
+  # catch_index <-  which.min(landing_trace$height_from_take_off)
+  # catch_time <- landing_trace$time[catch_index]
   catch_time <- landing_trace$time[ceiling(zero_crossings(x = landing_trace$velocity)[1])]
 
   start_time <- trace$time[1]
